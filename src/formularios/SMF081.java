@@ -1,26 +1,28 @@
 package formularios;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
-import javax.swing.JCheckBox;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
-import javax.swing.JEditorPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.geom.Line2D;
 import java.awt.event.ActionEvent;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import java.awt.SystemColor;
 
 public class SMF081 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -29,7 +31,7 @@ public class SMF081 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SMF081 frame = new SMF081();
+					SMF081 frame = new SMF081(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,221 +43,249 @@ public class SMF081 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SMF081() {
+	public SMF081(JFrame parent) {
+		setTitle("SMF08-1");
+		setSize(670, 675);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 671, 666);
+		setLocationRelativeTo(parent);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(101, 257, 289, 20);
-		contentPane.add(textPane_1);
-		
-		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setBounds(511, 257, 134, 20);
-		contentPane.add(textPane_2);
-		
-		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setBounds(101, 288, 390, 20);
-		contentPane.add(textPane_3);
-		
-		JCheckBox chckbxSi = new JCheckBox("si");
-		chckbxSi.setBounds(227, 32, 37, 23);
-		contentPane.add(chckbxSi);
-		
-		JCheckBox chckbxNo = new JCheckBox("no");
-		chckbxNo.setBounds(266, 32, 51, 23);
-		contentPane.add(chckbxNo);
-		
-		JCheckBox checkBox = new JCheckBox("si");
-		checkBox.setBounds(225, 58, 37, 23);
-		contentPane.add(checkBox);
-		
-		JCheckBox checkBox_1 = new JCheckBox("si");
-		checkBox_1.setBounds(227, 84, 37, 23);
-		contentPane.add(checkBox_1);
-		
-		JCheckBox checkBox_2 = new JCheckBox("si");
-		checkBox_2.setBounds(227, 108, 37, 23);
-		contentPane.add(checkBox_2);
-		
-		JCheckBox checkBox_3 = new JCheckBox("si");
-		checkBox_3.setBounds(227, 132, 37, 23);
-		contentPane.add(checkBox_3);
-		
-		JCheckBox checkBox_4 = new JCheckBox("si");
-		checkBox_4.setBounds(227, 158, 37, 23);
-		contentPane.add(checkBox_4);
-		
-		JCheckBox checkBox_5 = new JCheckBox("no");
-		checkBox_5.setBounds(266, 58, 51, 23);
-		contentPane.add(checkBox_5);
-		
-		JCheckBox checkBox_6 = new JCheckBox("no");
-		checkBox_6.setBounds(266, 84, 51, 23);
-		contentPane.add(checkBox_6);
-		
-		JCheckBox checkBox_7 = new JCheckBox("no");
-		checkBox_7.setBounds(266, 108, 51, 23);
-		contentPane.add(checkBox_7);
-		
-		JCheckBox checkBox_8 = new JCheckBox("no");
-		checkBox_8.setBounds(266, 132, 51, 23);
-		contentPane.add(checkBox_8);
-		
-		JCheckBox checkBox_9 = new JCheckBox("no");
-		checkBox_9.setBounds(266, 158, 51, 23);
-		contentPane.add(checkBox_9);
-		
-		JTextPane textPane_4 = new JTextPane();
-		textPane_4.setBounds(101, 319, 289, 20);
-		contentPane.add(textPane_4);
-		
-		JTextPane textPane_5 = new JTextPane();
-		textPane_5.setBounds(511, 319, 134, 20);
-		contentPane.add(textPane_5);
-		
-		JTextPane textPane_6 = new JTextPane();
-		textPane_6.setBounds(101, 350, 390, 20);
-		contentPane.add(textPane_6);
-		
-		JTextPane textPane_7 = new JTextPane();
-		textPane_7.setBounds(101, 409, 400, 20);
-		contentPane.add(textPane_7);
-		
-		JTextPane textPane_8 = new JTextPane();
-		textPane_8.setBounds(149, 471, 289, 20);
-		contentPane.add(textPane_8);
-		
-		JTextPane textPane_9 = new JTextPane();
-		textPane_9.setBounds(539, 471, 106, 20);
-		contentPane.add(textPane_9);
-		
-		JTextPane textPane_10 = new JTextPane();
-		textPane_10.setBounds(146, 502, 486, 20);
-		contentPane.add(textPane_10);
-		
-		JLabel lblDocumentosEntregadosA = new JLabel("Documentos Entregados a los Testigos de Identidad");
-		lblDocumentosEntregadosA.setBounds(15, 11, 630, 14);
-		lblDocumentosEntregadosA.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblDocumentosEntregadosA);
-		
-		JLabel lblDocumentosEntregados = new JLabel("Documentos Entregados:");
-		lblDocumentosEntregados.setBounds(0, 34, 219, 14);
-		contentPane.add(lblDocumentosEntregados);
-		
-		JLabel lblSolicitudDePrctica = new JLabel("Solicitud de Pr\u00E1ctica de Necropsia:");
-		lblSolicitudDePrctica.setBounds(0, 60, 219, 14);
-		contentPane.add(lblSolicitudDePrctica);
-		
-		JLabel lblOficioDeEntrega = new JLabel("Oficio de Entrega de Cad\u00E1ver:");
-		lblOficioDeEntrega.setBounds(5, 88, 219, 14);
-		contentPane.add(lblOficioDeEntrega);
-		
-		JLabel lblActaMdica = new JLabel("Acta M\u00E9dica:");
-		lblActaMdica.setBounds(0, 112, 219, 14);
-		contentPane.add(lblActaMdica);
-		
-		JLabel lblCertificadoDeDefuncin = new JLabel("Certificado de defunci\u00F3n:");
-		lblCertificadoDeDefuncin.setBounds(5, 136, 214, 14);
-		contentPane.add(lblCertificadoDeDefuncin);
-		
-		JLabel lblConstanciaDeRefrigeracin = new JLabel("Constancia de Refrigeraci\u00F3n (en su caso):");
-		lblConstanciaDeRefrigeracin.setBounds(5, 162, 219, 14);
-		contentPane.add(lblConstanciaDeRefrigeracin);
-		
-		JLabel lblObservaciones = new JLabel("Observaciones:");
-		lblObservaciones.setBounds(6, 191, 119, 14);
-		contentPane.add(lblObservaciones);
-		
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(5, 257, 86, 14);
-		contentPane.add(lblNombre);
-		
-		JLabel lblDomicilio = new JLabel("Domicilio:");
-		lblDomicilio.setBounds(5, 288, 86, 14);
-		contentPane.add(lblDomicilio);
-		
-		JLabel lblParentesco = new JLabel("Parentesco");
-		lblParentesco.setBounds(400, 263, 101, 14);
-		contentPane.add(lblParentesco);
-		
-		JLabel lblParentesco_1 = new JLabel("Parentesco:");
-		lblParentesco_1.setBounds(400, 322, 101, 14);
-		contentPane.add(lblParentesco_1);
-		
-		JLabel lblNombre_1 = new JLabel("Nombre:");
-		lblNombre_1.setBounds(5, 322, 86, 14);
-		contentPane.add(lblNombre_1);
-		
-		JLabel lblDomicilio_1 = new JLabel("Domicilio:");
-		lblDomicilio_1.setBounds(5, 356, 86, 14);
-		contentPane.add(lblDomicilio_1);
-		
-		JLabel lblPersonalDelIncifo = new JLabel("Personal del INCIFO Responsable de la Entrega");
-		lblPersonalDelIncifo.setBounds(5, 381, 593, 14);
-		contentPane.add(lblPersonalDelIncifo);
-		
-		JLabel lblFuneraria = new JLabel("Funeraria ");
-		lblFuneraria.setBounds(5, 446, 640, 14);
-		lblFuneraria.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblFuneraria);
-		
-		JLabel lblNombreDeLa = new JLabel("Nombre de la Funeraria:");
-		lblNombreDeLa.setBounds(0, 477, 149, 14);
-		contentPane.add(lblNombreDeLa);
-		
-		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
-		lblTelfono.setBounds(455, 471, 79, 14);
-		contentPane.add(lblTelfono);
-		
-		JLabel lblDomicilio_2 = new JLabel("Domicilio:");
-		lblDomicilio_2.setBounds(0, 508, 125, 14);
-		contentPane.add(lblDomicilio_2);
-		
-		JLabel lblNombreDelGestor = new JLabel("Nombre del Gestor:");
-		lblNombreDelGestor.setBounds(0, 538, 125, 14);
-		contentPane.add(lblNombreDelGestor);
-		
-		textField = new JTextField();
-		textField.setBounds(149, 533, 254, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(440, 162, -50, 11);
-		contentPane.add(editorPane);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(135, 415, 46, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblTurno = new JLabel("Turno:");
-		lblTurno.setBounds(5, 415, 86, 14);
-		contentPane.add(lblTurno);
-		
-		JButton btnNewButton = new JButton("CANCELAR");
-		btnNewButton.setBounds(311, 593, 112, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		contentPane.add(btnNewButton);
-		
-		JButton btnGuardar = new JButton("GUARDAR");
-		btnGuardar.setBounds(477, 593, 121, 23);
-		contentPane.add(btnGuardar);
+		JPanel panEntregados = new JPanel();
+		panEntregados.setLayout(null);
+		panEntregados.setBorder(BorderFactory.createTitledBorder("DOCUMENTOS ENTREGADOS A LOS TESTIGOS DE IDENTIDAD"));
+		panEntregados.setBounds(0, 10, 650, 400);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(SMF081.class.getResource("/imagenes/inc3.PNG")));
-		label.setBounds(475, 6, 170, 246);
-		contentPane.add(label);
+		label.setBounds(475, 10, 170, 246);
+		panEntregados.add(label);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(129, 187, 309, 59);
-		contentPane.add(textPane);
+		JLabel labDocsEntregados = new JLabel("Documento:");
+		labDocsEntregados.setBounds(15, 30, 100, 20);
+		
+		JLabel labSi = new JLabel("Si");
+		labSi.setBounds(330, 30, 40, 20);
+		
+		JLabel labNo = new JLabel("No");
+		labNo.setBounds(360, 30, 40, 20);
+		
+		JLabel lblSolicitudDePrctica = new JLabel("Solicitud de Pr\u00E1ctica de Necropsia:");
+		lblSolicitudDePrctica.setBounds(15, 60, 219, 20);
+		panEntregados.add(lblSolicitudDePrctica);
+		
+		JLabel lblOficioDeEntrega = new JLabel("Oficio de Entrega de Cad\u00E1ver:");
+		lblOficioDeEntrega.setBounds(15, 90, 219, 20);
+		panEntregados.add(lblOficioDeEntrega);
+		
+		JLabel lblActaMdica = new JLabel("Acta M\u00E9dica:");
+		lblActaMdica.setBounds(15, 120, 219, 20);
+		panEntregados.add(lblActaMdica);
+		
+		JLabel lblCertificadoDeDefuncin = new JLabel("Certificado de defunci\u00F3n:");
+		lblCertificadoDeDefuncin.setBounds(15, 150, 214, 20);
+		panEntregados.add(lblCertificadoDeDefuncin);
+		
+		JLabel lblConstanciaDeRefrigeracin = new JLabel("Constancia de Refrigeraci\u00F3n (en su caso):");
+		lblConstanciaDeRefrigeracin.setBounds(15, 180, 240, 20);
+		panEntregados.add(lblConstanciaDeRefrigeracin);
+		
+		JLabel lblObservaciones = new JLabel("Observaciones:");
+		lblObservaciones.setBounds(15, 210, 119, 20);
+		panEntregados.add(lblObservaciones);
+		
+		JTextArea txtObservaciones = new JTextArea();
+		txtObservaciones.setLineWrap(true);
+		
+		JScrollPane spObservaciones = new JScrollPane(txtObservaciones);
+		spObservaciones.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		spObservaciones.setBounds(130, 210, 300, 40);
+		
+		JRadioButton rbSi_1 = new JRadioButton();
+		rbSi_1.setBounds(330, 60, 30, 20);
+		JRadioButton rbSi_2 = new JRadioButton();
+		rbSi_2.setBounds(330, 90, 30, 20);
+		JRadioButton rbSi_3 = new JRadioButton();
+		rbSi_3.setBounds(330, 120, 30, 20);
+		JRadioButton rbSi_4 = new JRadioButton();
+		rbSi_4.setBounds(330, 150, 30, 20);
+		JRadioButton rbSi_5 = new JRadioButton();
+		rbSi_5.setBounds(330, 180, 30, 20);
+		JRadioButton rbNo_1 = new JRadioButton();
+		rbNo_1.setBounds(360, 60, 30, 20);
+		JRadioButton rbNo_2 = new JRadioButton();
+		rbNo_2.setBounds(360, 90, 30, 20);
+		JRadioButton rbNo_3 = new JRadioButton();
+		rbNo_3.setBounds(360, 120, 30, 20);
+		JRadioButton rbNo_4 = new JRadioButton();
+		rbNo_4.setBounds(360, 150, 30, 20);
+		JRadioButton rbNo_5 = new JRadioButton();
+		rbNo_5.setBounds(360, 180, 30, 20);
+		
+		ButtonGroup buttonGroup_1 = new ButtonGroup();
+		buttonGroup_1.add(rbSi_1);
+		buttonGroup_1.add(rbNo_1);
+		ButtonGroup buttonGroup_2 = new ButtonGroup();
+		buttonGroup_2.add(rbSi_2);
+		buttonGroup_2.add(rbNo_2);
+		ButtonGroup buttonGroup_3 = new ButtonGroup();
+		buttonGroup_3.add(rbSi_3);
+		buttonGroup_3.add(rbNo_3);
+		ButtonGroup buttonGroup_4 = new ButtonGroup();
+		buttonGroup_4.add(rbSi_4);
+		buttonGroup_4.add(rbNo_4);
+		ButtonGroup buttonGroup_5 = new ButtonGroup();
+		buttonGroup_5.add(rbSi_5);
+		buttonGroup_5.add(rbNo_5);
+		
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(15, 265, 86, 20);
+		
+		JTextField tfNombre = new JTextField();
+		tfNombre.setBounds(90, 265, 280, 20);
+		
+		JLabel lblParentesco = new JLabel("Parentesco:");
+		lblParentesco.setBounds(390, 265, 101, 20);
+		
+		JTextField tfParentesco = new JTextField();
+		tfParentesco.setBounds(480, 265, 120, 20);
+		
+		JLabel lblDomicilio = new JLabel("Domicilio:");
+		lblDomicilio.setBounds(15, 295, 86, 20);
+		
+		JTextField tfDomicilio = new JTextField();
+		tfDomicilio.setBounds(90, 295, 510, 20);
+		
+		JLabel lblNombre_1 = new JLabel("Nombre:");
+		lblNombre_1.setBounds(15, 325, 86, 20);
+		
+		JTextField tfNombre_1 = new JTextField();
+		tfNombre_1.setBounds(90, 325, 280, 20);
+		
+		JLabel lblParentesco_1 = new JLabel("Parentesco:");
+		lblParentesco_1.setBounds(390, 325, 101, 20);
+		
+		JTextField tfParentesco_1 = new JTextField();
+		tfParentesco_1.setBounds(480, 325, 120, 20);
+		
+		JLabel lblDomicilio_1 = new JLabel("Domicilio:");
+		lblDomicilio_1.setBounds(15, 355, 86, 20);	
+		
+		JTextField tfDomicilio_1 = new JTextField();
+		tfDomicilio_1.setBounds(90, 355, 510, 20);
+		
+		panEntregados.add(labDocsEntregados);
+		panEntregados.add(labSi);
+		panEntregados.add(labNo);
+		panEntregados.add(rbSi_1);
+		panEntregados.add(rbSi_2);
+		panEntregados.add(rbSi_3);
+		panEntregados.add(rbSi_4);
+		panEntregados.add(rbSi_5);
+		panEntregados.add(rbNo_1);
+		panEntregados.add(rbNo_2);
+		panEntregados.add(rbNo_3);
+		panEntregados.add(rbNo_4);
+		panEntregados.add(rbNo_5);
+		panEntregados.add(spObservaciones);
+		panEntregados.add(lblNombre);
+		panEntregados.add(tfNombre);
+		panEntregados.add(lblParentesco);
+		panEntregados.add(tfParentesco);
+		panEntregados.add(lblDomicilio);
+		panEntregados.add(tfDomicilio);
+		panEntregados.add(lblNombre_1);
+		panEntregados.add(tfNombre_1);
+		panEntregados.add(lblParentesco_1);
+		panEntregados.add(tfParentesco_1);
+		panEntregados.add(lblDomicilio_1);
+		panEntregados.add(tfDomicilio_1);
+		
+		JLabel lblPersonalDelIncifo = new JLabel("PERSONAL DEL INCIFO RESPONSABLE DE LA ENTREGA");
+		lblPersonalDelIncifo.setBounds(10, 415, 593, 20);		
+		
+		JLabel lblTurno = new JLabel("Turno:");
+		lblTurno.setBounds(15, 445, 86, 20);
+			
+		JTextField tfTurno = new JTextField();
+		tfTurno.setBounds(80, 445, 450, 20);
+		
+		JPanel panFuneraria = new JPanel();
+		panFuneraria.setLayout(null);
+		panFuneraria.setBounds(1, 475, 650, 115);
+		panFuneraria.setBorder(BorderFactory.createTitledBorder("FUNERARIA"));
+		
+		JLabel lblNombreDeLa = new JLabel("Nombre de la Funeraria:");
+		lblNombreDeLa.setBounds(10, 20, 149, 20);
+		
+		JTextField tfNombreFuneraria = new JTextField();
+		tfNombreFuneraria.setBounds(160, 20, 254, 20);
+		
+		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
+		lblTelfono.setBounds(440, 20, 79, 20);
+		
+		JTextField tfTelefono = new JTextField();
+		tfTelefono.setBounds(510, 20, 100, 20);
+		
+		JLabel lblDomicilio_2 = new JLabel("Domicilio:");
+		lblDomicilio_2.setBounds(10, 50, 125, 20);
+		
+		JTextField tfDomicilio_2 = new JTextField();
+		tfDomicilio_2.setBounds(85, 50, 500, 20);
+		
+		JLabel lblNombreDelGestor = new JLabel("Nombre del Gestor:");
+		lblNombreDelGestor.setBounds(10, 80, 125, 20);
+		
+		JTextField tfNombreDelGestor = new JTextField();
+		tfNombreDelGestor.setBounds(130, 80, 340, 20);
+		
+		panFuneraria.add(lblNombreDeLa);
+		panFuneraria.add(tfNombreFuneraria);
+		panFuneraria.add(lblTelfono);
+		panFuneraria.add(tfTelefono);
+		panFuneraria.add(lblDomicilio_2);
+		panFuneraria.add(tfDomicilio_2);
+		panFuneraria.add(lblNombreDelGestor);
+		panFuneraria.add(tfNombreDelGestor);
+		
+		JButton btnGuardar = new JButton("GUARDAR");
+		btnGuardar.setBounds(520, 600, 121, 25);		
+		
+		JButton btnAtras = new JButton("ATRAS");
+		btnAtras.setBounds(380, 600, 121, 25);	
+		
+		JButton btnNewButton = new JButton("CANCELAR");
+		btnNewButton.setBounds(245, 600, 115, 25);
+		
+		contentPane.add(panEntregados);
+		contentPane.add(lblPersonalDelIncifo);
+		contentPane.add(lblTurno);
+		contentPane.add(tfTurno);
+		contentPane.add(panFuneraria);
+		contentPane.add(btnGuardar);
+		contentPane.add(btnNewButton);
+		contentPane.add(btnAtras);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				((JFrame)parent.getParent()).setVisible(true);
+			}
+		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				parent.setVisible(true);
+			}
+		});
 	}
+	
+	public void paint(Graphics g) {
+	    super.paint(g); 
+	    Graphics2D g2 = (Graphics2D) g;
+	    Line2D lin = new Line2D.Float(22, 95, 400, 95);
+	    g2.draw(lin);
+	  }
 }

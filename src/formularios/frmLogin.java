@@ -1,15 +1,11 @@
 package formularios;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import bean.Usuario;
 import mantenimientos.GestionUsuario;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -35,6 +31,8 @@ public class frmLogin extends JFrame {
 				try {
 					frmLogin frame = new frmLogin();
 					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -113,7 +111,7 @@ public class frmLogin extends JFrame {
 
 			this.dispose();
 
-			frmBienvenida bienvenida = new frmBienvenida();
+			frmBienvenida bienvenida = new frmBienvenida(this);
 			bienvenida.setVisible(true);
 
 		} else {

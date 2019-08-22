@@ -1,64 +1,67 @@
 package formularios;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Color;
+import javax.swing.JOptionPane;
+
+import java.awt.Component;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JEditorPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JScrollPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.JTextArea;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+
+import org.jdesktop.swingx.JXDatePicker;
+
+import mantenimientos.GestionSMF08;
 
 
 public class SMF08 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField tfNumExp;
+	private JTextField tfNumCert;
+	private JTextField tfNombreAlias;
+	private JTextField tfCarpetaInv;
 	private JLabel lblCausasDeLa;
 	private JLabel lblNewLabel_4;
-	private JTextField textField_5;
-	private JLabel lblDatosGenerales;
+	private JTextField tfPerito;
 	private JLabel lblLugarDeNacimeinto;
-	private JTextField textField_6;
+	private JTextField tfLugNac;
 	private JLabel lblEdad;
-	private JTextField textField_7;
+	private JTextField tfEdad;
 	private JLabel lblEstadoCivil;
-	private JTextField textField_8;
+	private JTextField tfEstadoCivil;
 	private JLabel lblOcupacion;
-	private JTextField textField_9;
+	private JTextField tfOcupacion;
 	private JLabel lblDomicilio;
-	private JTextField textField_10;
+	private JTextField tfDomicilio;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JLabel lblNewLabel_7;
+	private JTextField tfNomMadre;
+	private JTextField tfNomPadre;
 	private JLabel lblNewLabel_8;
-	private JTextField textField_13;
 	private JLabel lblNombreCorrecto;
 	private JTextField textField_14;
 	private JButton btnNewButton_1;
 	private JButton btnSiguiente;
 	private JButton btnCancelar;
 	private JLabel label;
+	private JFrame parent;
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	private SimpleDateFormat sdfMySQL = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * Launch the application.
@@ -67,7 +70,7 @@ public class SMF08 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SMF08 frame = new SMF08();
+					SMF08 frame = new SMF08(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -79,194 +82,285 @@ public class SMF08 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SMF08() {
+	public SMF08(JFrame parent) {
+		setTitle("SMF08");
+		setSize(580, 700);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 561, 597);
+		setLocationRelativeTo(parent);
+		
+		this.parent = parent;
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(135, 206, 250));
+		//contentPane.setBackground(new Color(135, 206, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPane.setLayout(new BorderLayout());
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Num Exp:");
-		lblNewLabel.setBounds(230, 14, 77, 14);
+		lblNewLabel.setBounds(180, 13, 77, 14);
 		
 		JLabel lblNewLabel_1 = new JLabel("Num Certificado:");
-		lblNewLabel_1.setBounds(230, 39, 107, 14);
+		lblNewLabel_1.setBounds(180, 38, 107, 14);
 		
-		textField = new JTextField();
-		textField.setBounds(408, 11, 127, 20);
-		textField.setColumns(10);
+		JButton btnBusqueda = new JButton("Buscar");
+		btnBusqueda.setBounds(460, 36, 80, 20);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(408, 36, 127, 20);
-		textField_1.setColumns(10);
+		tfNumExp = new JTextField();
+		tfNumExp.setBounds(310, 11, 127, 20);
 		
-		JLabel lblNewLabel_2 = new JLabel("Fecha de ingreso del cadaver: ");
-		lblNewLabel_2.setBounds(134, 65, 203, 14);
+		tfNumCert = new JTextField();
+		tfNumCert.setBounds(310, 36, 127, 20);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(347, 62, 188, 20);
-		textField_2.setColumns(10);
+		JLabel lblNewLabel_2 = new JLabel("Fecha de ingreso: ");
+		lblNewLabel_2.setBounds(180, 75, 203, 20);
 		
-		JLabel lblNewLabel_3 = new JLabel("Nombre:");
-		lblNewLabel_3.setBounds(144, 90, 56, 20);
+		JXDatePicker fechaIngreso = new JXDatePicker();
+		fechaIngreso.setFormats(sdf);
+		fechaIngreso.setDate(Calendar.getInstance().getTime());
+		fechaIngreso.setBounds(320, 75, 130, 20);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(248, 90, 287, 20);
-		textField_3.setColumns(10);
+		JLabel lblNewLabel_3 = new JLabel("Nombre: ");
+		lblNewLabel_3.setBounds(150, 109, 56, 20);
 		
-		JLabel lblCarpetaDeInvestigacion = new JLabel("Carpeta de Investigacion:");
-		lblCarpetaDeInvestigacion.setBounds(15, 124, 155, 14);
+		tfNombreAlias = new JTextField();
+		tfNombreAlias.setBounds(220, 109, 300, 20);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(257, 121, 205, 20);
-		textField_4.setText("");
-		textField_4.setColumns(10);
+		JLabel lblCarpetaDeInvestigacion = new JLabel("Carpeta de Investigacion: ");
+		lblCarpetaDeInvestigacion.setBounds(15, 140, 155, 20);
 		
-		lblCausasDeLa = new JLabel("Causas de la muerte");
-		lblCausasDeLa.setBounds(15, 164, 143, 14);
+		tfCarpetaInv = new JTextField();
+		tfCarpetaInv.setBounds(180, 140, 150, 20);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(199, 149, 336, 39);
+		lblCausasDeLa = new JLabel("Causas de muerte: ");
+		lblCausasDeLa.setBounds(15, 175, 143, 20);
 		
-		lblNewLabel_4 = new JLabel("Perito que realizo la necropsia");
-		lblNewLabel_4.setBounds(15, 199, 175, 14);
+		JTextArea txtCausas= new JTextArea();
+		txtCausas.setLineWrap(true);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(200, 199, 335, 20);
-		textField_5.setColumns(10);
+		JScrollPane spCausas = new JScrollPane(txtCausas);
+		spCausas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		spCausas.setBounds(145, 175, 385, 60);
 		
-		lblDatosGenerales = new JLabel("DATOS GENERALES");
-		lblDatosGenerales.setBounds(230, 230, 138, 14);
+		lblNewLabel_4 = new JLabel("Perito que realizo la necropsia: ");
+		lblNewLabel_4.setBounds(15, 250, 190, 20);
+		
+		tfPerito = new JTextField();
+		tfPerito.setBounds(220, 250, 310, 20);
+		
+		JPanel panDatosGenerales = new JPanel();
+		panDatosGenerales.setBorder(BorderFactory.createTitledBorder("DATOS GENERALES"));
+		panDatosGenerales.setBounds(0, 295, 563, 210);
+		panDatosGenerales.setLayout(null);
+		
+		JPanel panIdentificacion = new JPanel();
+		panIdentificacion.setBorder(BorderFactory.createTitledBorder("IDENTIFICACION / ENTREGA DE DOCUMENTOS Y CADAVER"));
+		panIdentificacion.setBounds(0, 520, 563, 100);
+		panIdentificacion.setLayout(null);
+		
 		contentPane.setLayout(null);
 		contentPane.add(lblNewLabel);
 		contentPane.add(lblNewLabel_1);
-		contentPane.add(textField);
-		contentPane.add(textField_1);
+		contentPane.add(tfNumExp);
+		contentPane.add(tfNumCert);
 		contentPane.add(lblNewLabel_2);
-		contentPane.add(textField_2);
+		contentPane.add(fechaIngreso);
 		contentPane.add(lblNewLabel_3);
-		contentPane.add(textField_3);
+		contentPane.add(tfNombreAlias);
+		contentPane.add(btnBusqueda);
 		contentPane.add(lblCarpetaDeInvestigacion);
-		contentPane.add(textField_4);
+		contentPane.add(tfCarpetaInv);
 		contentPane.add(lblCausasDeLa);
-		contentPane.add(editorPane);
+		contentPane.add(spCausas);
 		contentPane.add(lblNewLabel_4);
-		contentPane.add(textField_5);
-		contentPane.add(lblDatosGenerales);
+		contentPane.add(tfPerito);	
+		contentPane.add(panDatosGenerales);
+		contentPane.add(panIdentificacion);
 		
-		lblLugarDeNacimeinto = new JLabel("Lugar de Nacimiento");
-		lblLugarDeNacimeinto.setBounds(15, 248, 143, 14);
+		lblLugarDeNacimeinto = new JLabel("Lugar de Nacimiento: ");
+		lblLugarDeNacimeinto.setBounds(13, 30, 143, 20);
 		lblLugarDeNacimeinto.setToolTipText("");
-		contentPane.add(lblLugarDeNacimeinto);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(158, 245, 377, 20);
-		contentPane.add(textField_6);
-		textField_6.setColumns(10);
+		tfLugNac = new JTextField();
+		tfLugNac.setBounds(155, 30, 260, 20);
 		
-		lblEdad = new JLabel("Edad:");
-		lblEdad.setBounds(15, 284, 34, 14);
-		contentPane.add(lblEdad);
+		lblEdad = new JLabel("Edad: ");
+		lblEdad.setBounds(430, 30, 34, 20);
 		
-		textField_7 = new JTextField();
-		textField_7.setBounds(53, 281, 71, 20);
-		contentPane.add(textField_7);
-		textField_7.setColumns(10);
+		tfEdad = new JTextField();
+		tfEdad.setBounds(470, 30, 50, 20);
 		
-		lblEstadoCivil = new JLabel("Estado Civil");
-		lblEstadoCivil.setBounds(134, 284, 71, 14);
-		contentPane.add(lblEstadoCivil);
+		lblEstadoCivil = new JLabel("Estado Civil: ");
+		lblEstadoCivil.setBounds(13, 65, 71, 20);
 		
-		textField_8 = new JTextField();
-		textField_8.setBounds(221, 281, 86, 20);
-		contentPane.add(textField_8);
-		textField_8.setColumns(10);
+		tfEstadoCivil = new JTextField();
+		tfEstadoCivil.setBounds(100, 65, 130, 20);
 		
-		lblOcupacion = new JLabel("Ocupacion");
-		lblOcupacion.setBounds(312, 284, 77, 14);
-		contentPane.add(lblOcupacion);
+		lblOcupacion = new JLabel("Ocupacion: ");
+		lblOcupacion.setBounds(260, 65, 80, 20);
 		
-		textField_9 = new JTextField();
-		textField_9.setBounds(392, 276, 143, 20);
-		contentPane.add(textField_9);
-		textField_9.setColumns(10);
+		tfOcupacion = new JTextField();
+		tfOcupacion.setBounds(340, 65, 160, 20);
 		
-		lblDomicilio = new JLabel("Domicilio");
-		lblDomicilio.setBounds(15, 309, 56, 14);
-		contentPane.add(lblDomicilio);
+		lblDomicilio = new JLabel("Domicilio:");
+		lblDomicilio.setBounds(13, 100, 56, 20);
 		
-		textField_10 = new JTextField();
-		textField_10.setBounds(117, 306, 418, 20);
-		contentPane.add(textField_10);
-		textField_10.setColumns(10);
+		tfDomicilio = new JTextField();
+		tfDomicilio.setBounds(85, 100, 450, 20);
 		
-		lblNewLabel_5 = new JLabel("Nombre Padre");
-		lblNewLabel_5.setBounds(15, 348, 133, 14);
-		contentPane.add(lblNewLabel_5);
+		lblNewLabel_5 = new JLabel("Nombre del Padre:");
+		lblNewLabel_5.setBounds(13, 135, 133, 20);
 		
-		lblNewLabel_6 = new JLabel("Nombre Madre");
-		lblNewLabel_6.setBounds(15, 383, 133, 14);
-		contentPane.add(lblNewLabel_6);
+		lblNewLabel_6 = new JLabel("Nombre de la Madre:");
+		lblNewLabel_6.setBounds(15, 170, 133, 20);
 		
-		textField_11 = new JTextField();
-		textField_11.setBounds(158, 345, 377, 20);
-		contentPane.add(textField_11);
-		textField_11.setColumns(10);
+		tfNomMadre = new JTextField();
+		tfNomMadre.setBounds(158, 135, 377, 20);
+
+		tfNomPadre = new JTextField();
+		tfNomPadre.setBounds(158, 170, 377, 20);
 		
-		textField_12 = new JTextField();
-		textField_12.setBounds(158, 380, 377, 20);
-		contentPane.add(textField_12);
-		textField_12.setColumns(10);
+		panDatosGenerales.add(lblLugarDeNacimeinto);
+		panDatosGenerales.add(lblEdad);
+		panDatosGenerales.add(lblEstadoCivil);
+		panDatosGenerales.add(lblOcupacion);
+		panDatosGenerales.add(lblDomicilio);
+		panDatosGenerales.add(lblNewLabel_5);
+		panDatosGenerales.add(lblNewLabel_6);
+		panDatosGenerales.add(tfLugNac);
+		panDatosGenerales.add(tfEdad);
+		panDatosGenerales.add(tfEstadoCivil);
+		panDatosGenerales.add(tfOcupacion);
+		panDatosGenerales.add(tfDomicilio);
+		panDatosGenerales.add(tfNomMadre);
+		panDatosGenerales.add(tfNomPadre);
 		
-		lblNewLabel_7 = new JLabel("IDENTIFICACION");
-		lblNewLabel_7.setBounds(257, 411, 107, 14);
-		contentPane.add(lblNewLabel_7);
+		lblNewLabel_8 = new JLabel("Fecha de Egreso:");
+		lblNewLabel_8.setBounds(15, 30, 133, 20);
 		
-		lblNewLabel_8 = new JLabel("Fecha Egreso");
-		lblNewLabel_8.setBounds(15, 439, 133, 14);
-		contentPane.add(lblNewLabel_8);
+		JXDatePicker dpFechaEgreso = new JXDatePicker(Calendar.getInstance().getTime());
+		dpFechaEgreso.setFormats(sdf);
+		dpFechaEgreso.setBounds(130, 30, 130, 20);
 		
-		textField_13 = new JTextField();
-		textField_13.setBounds(162, 436, 202, 20);
-		contentPane.add(textField_13);
-		textField_13.setColumns(10);
-		
-		lblNombreCorrecto = new JLabel("Nombre Correcto");
-		lblNombreCorrecto.setBounds(15, 474, 143, 14);
-		contentPane.add(lblNombreCorrecto);
+		lblNombreCorrecto = new JLabel("Nombre Correcto:");
+		lblNombreCorrecto.setBounds(15, 65, 143, 20);
 		
 		textField_14 = new JTextField();
-		textField_14.setBounds(166, 467, 202, 20);
-		contentPane.add(textField_14);
-		textField_14.setColumns(10);
+		textField_14.setBounds(140, 65, 290, 20);
+		
+		panIdentificacion.add(lblNewLabel_8);
+		panIdentificacion.add(dpFechaEgreso);
+		panIdentificacion.add(lblNombreCorrecto);
+		panIdentificacion.add(textField_14);
 		
 		btnNewButton_1 = new JButton("GUARDAR");
-		btnNewButton_1.setBounds(295, 510, 111, 23);
+		btnNewButton_1.setBounds(440, 625, 111, 25);
 		contentPane.add(btnNewButton_1);
 		
 		btnSiguiente = new JButton("SIGUIENTE");
-		btnSiguiente.setBounds(427, 510, 108, 23);
+		btnSiguiente.setBounds(310, 625, 108, 25);
 		contentPane.add(btnSiguiente);
 		
 		btnCancelar = new JButton("CANCELAR");
-		btnCancelar.addActionListener(new ActionListener() {
+		btnCancelar.setBounds(175, 625, 111, 25);
+		contentPane.add(btnCancelar);
+		
+		btnBusqueda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				this.setVisible(false);
-				new frmRP().setVisible(true);
-			}
-
-			private void setVisible(boolean b) {
-				// TODO Auto-generated method stub
+				String numExp = tfNumExp.getText();
+				GestionSMF08 dbManager = new GestionSMF08();
 				
+				if(dbManager.getNumExpExists(numExp)) {
+				
+					Map<String, String> listaDatos = dbManager.getDatosPage1(numExp);
+					
+					try {
+						
+						fechaIngreso.setDate(sdfMySQL.parse(listaDatos.get("fecha_ingreso")));
+						tfNombreAlias.setText(listaDatos.get("nom_alias"));
+						tfCarpetaInv.setText(listaDatos.get("carpeta_inv"));
+						tfLugNac.setText(listaDatos.get("lugar_nac"));
+						tfEdad.setText(listaDatos.get("edad"));
+						tfEstadoCivil.setText(listaDatos.get("estado_civil"));
+						tfOcupacion.setText(listaDatos.get("ocupacion"));
+						tfDomicilio.setText(listaDatos.get("domicilio"));
+						tfNomPadre.setText(listaDatos.get("nom_padre"));
+						tfNomMadre.setText(listaDatos.get("nom_madre"));
+						
+					} catch(Exception err) {err.printStackTrace();}
+				} else {
+					JOptionPane.showMessageDialog(null, "No se encontro el expediente!");
+				}
 			}
 		});
-		btnCancelar.setBounds(144, 510, 111, 23);
-		contentPane.add(btnCancelar);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				parent.setVisible(true);
+			}
+		});
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = (JFrame) SwingUtilities.getRoot(((Component)e.getSource()));
+				frame.setVisible(false);
+				new SMF081(frame).setVisible(true);
+			}
+		});
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String numExp = tfNumExp.getText();
+				GestionSMF08 dbManager = new GestionSMF08();
+				
+				if(!dbManager.getNumExpExists(numExp)) {
+					
+					System.out.println("No existe el expediente!");
+					
+					//Se crea el cadaver y se almacenan los datos nuevos
+					
+					String nomAlias = tfNombreAlias.getText();
+					String carpeta = tfCarpetaInv.getText();
+					Date fechaIng = fechaIngreso.getDate();
+					String lugarNac = tfLugNac.getText();
+					String edad = tfEdad.getText();
+					String estCivil = tfEstadoCivil.getText();
+					String ocupacion = tfOcupacion.getText();
+					String domicilio = tfDomicilio.getText();
+					String nomPadre = tfNomPadre.getText();
+					String nomMadre = tfNomMadre.getText();
+					
+					dbManager.newPage1(numExp, nomAlias, carpeta, fechaIng, lugarNac, edad, estCivil, ocupacion, domicilio, nomPadre, nomMadre);
+					
+				}else {
+					
+					System.out.println("Ya existe el expediente!");
+					
+					//Se modifican los datos del cadaver que ya existe
+					
+					String nomAlias = tfNombreAlias.getText();
+					String carpeta = tfCarpetaInv.getText();
+					Date fechaIng = fechaIngreso.getDate();
+					String lugarNac = tfLugNac.getText();
+					String edad = tfEdad.getText();
+					String estCivil = tfEstadoCivil.getText();
+					String ocupacion = tfOcupacion.getText();
+					String domicilio = tfDomicilio.getText();
+					String nomPadre = tfNomPadre.getText();
+					String nomMadre = tfNomMadre.getText();
+					
+					dbManager.updatePage1(numExp, nomAlias, carpeta, fechaIng, lugarNac, edad, estCivil, ocupacion, domicilio, nomPadre, nomMadre);
+					
+				}
+			}
+		});
 		
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(SMF08.class.getResource("/imagenes/logo_INCIFO.png")));
 		label.setBounds(1, 0, 133, 119);
 		contentPane.add(label);
+	}
+	
+	public JFrame getParent() {
+		return this.parent;
 	}
 }

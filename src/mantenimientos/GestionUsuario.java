@@ -3,7 +3,6 @@ package mantenimientos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import bean.Usuario;
 import utils.MySQLConexion;
 
@@ -35,13 +34,13 @@ public class GestionUsuario {
 						rs.getString(5));
 
 			}
+			
+			return usuario;
 
 		} catch (Exception e) {
 			System.out.println("Error en obtener usuario");
+			return null;
 		}
-
-		return usuario;
-
 	}
 
 }

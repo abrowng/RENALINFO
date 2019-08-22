@@ -11,8 +11,8 @@ public class MySQLConexion {
 
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:8888/db_incifo";
-			String usr = "cuc";
-			String psw = "idiomasCuc";
+			String usr = "renalinfo";
+			String psw = "INCIFODB11";
 
 			con = DriverManager.getConnection(url, usr, psw);
 

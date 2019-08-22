@@ -1,6 +1,7 @@
 package formularios;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class frmNecro extends JFrame {
 
@@ -24,7 +26,7 @@ public class frmNecro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frmNecro frame = new frmNecro();
+					frmNecro frame = new frmNecro(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,9 +38,10 @@ public class frmNecro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public frmNecro() {
+	public frmNecro(JFrame parent) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(parent);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,21 +65,11 @@ public class frmNecro extends JFrame {
 		
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-		    this.setVisible(false);
-		    new frmBienvenida().setVisible(true);
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				parent.setVisible(true);
 		 
 			}
-			
-			
-
-			private void setVisible(boolean b) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		
-				
 		});
 		btnRegresar.setBounds(321, 212, 89, 23);
 		contentPane.add(btnRegresar);
